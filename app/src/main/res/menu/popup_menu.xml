@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/ChangeName"
+    android:title="zmień nazwę"/>
+
+    <item android:id="@+id/shareList"
+        android:title="udostępnij listę"/>
+    <item android:id="@+id/manageFriends"
+        android:title="zarządzaj znajomymi"/>
+
+    <item android:id="@+id/addToFavourites"
+        android:title="dodaj do ulubionych"/>
+    <item android:id="@+id/help"
+        android:title="pomoc"/>
+
+
+</menu>
