@@ -6,13 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddNewListActivity">
+    tools:context=".AddNewListActivity"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="nazwa listy" />
+        android:textSize="32dp"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:textColor="#00B8FF"
+        android:text="NAZWA LISTY" />
 
 
     <EditText
@@ -20,8 +25,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_border"
+        android:padding="10dp"
         android:ems="10"
         android:inputType="text"
 
         />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="32dp"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:textColor="#00B8FF"
+        android:text="PRODUKTY" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+    <EditText
+        android:id="@+id/editTextText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_border"
+        android:padding="10dp"
+        android:ems="10"
+        android:layout_margin="5dp"
+        android:inputType="text"
+        />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:textSize="32dp"
+        android:backgroundTint="#8122c0"
+        android:text="DODAJ PRODUKT" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+       android:textSize="32dp"
+        android:layout_margin="5dp"
+        android:backgroundTint="#8122c0"
+        android:text="ZATWIERDŹ LISTĘ" />
 </LinearLayout>
