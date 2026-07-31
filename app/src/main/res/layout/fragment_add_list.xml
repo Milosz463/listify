@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddListFragment">
+    tools:context=".AddListFragment"
+    android:padding="10dp">
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="32dp"
         android:padding="5dp"
+        android:textStyle="bold"
         android:textColor="#00B8FF"
         android:text="NAZWA LISTY" />
 
@@ -32,10 +34,12 @@
         android:layout_height="wrap_content"
         android:textSize="32dp"
         android:padding="5dp"
+        android:textStyle="bold"
         android:textColor="#00B8FF"
         android:text="PRODUKTY" />
 
     <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
