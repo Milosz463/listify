@@ -14,19 +14,18 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.listify.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
-ActivityHomeBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.nav_host_fragment), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        binding=ActivityHomeBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
 
 
 

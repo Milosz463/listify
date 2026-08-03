@@ -27,7 +27,6 @@ public class HomeFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.fragment_home, container, false);
         Button addListButton=view.findViewById(R.id.buttonAddList);
-        Button searchListButton=view.findViewById(R.id.searchList);
         SearchView searchListSearchView=view.findViewById(R.id.searchView);
         addListButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -36,23 +35,7 @@ public class HomeFragment extends Fragment {
                         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addListFragment);
                     }
                 });
-        searchListButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(searchListButton.getVisibility()==view.GONE){
-                            searchListButton.setVisibility(view.VISIBLE);
-                            searchListButton.setAlpha(0f);
-                            searchListButton.animate().alpha(1f).setDuration(300).start();
 
-
-                            searchListButton.requestFocus();
-                        }else{
-                            searchListButton.setVisibility(view.GONE);
-                        }
-                    }
-                }
-        );
         searchListSearchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
                     @Override
