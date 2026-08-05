@@ -6,6 +6,15 @@
     android:orientation="vertical"
     tools:context=".AddListFragment"
     android:padding="10dp">
+
+    <Button
+        android:id="@+id/buttonGoBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:background="@android:color/transparent"
+        android:textColor="@color/black"
+        android:text="BACK" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
