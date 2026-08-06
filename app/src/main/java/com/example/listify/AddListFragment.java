@@ -11,10 +11,16 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class AddListFragment extends Fragment {
+
+    ArrayList<String>arrayListProducts=new ArrayList<>();
     ArrayAdapter<String>adapter;
+    EditText editTextListName;
     public AddListFragment() {
         // Required empty public constructor
     }
@@ -23,10 +29,18 @@ public class AddListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_add_list,container,false);
-        ListView listViewNewLists=view.findViewById(R.id.listView);
+
+        ListView listViewNewLists=view.findViewById(R.id.listViewProducts);
         Button buttonGoBack=view.findViewById(R.id.buttonGoBack);
-        String[]elementy={""};
-        adapter=new ArrayAdapter<>(getContext(),R.layout.list_view_style,elementy);
+        Button buttonAddProduct=view.findViewById(R.id.buttonAddProduct);
+        Button buttonConfirmList=view.findViewById(R.id.buttonConfirmList);
+        EditText editTextProductName=view.findViewById(R.id.editTextTextProductName);
+        editTextListName=view.findViewById(R.id.editTextListName);
+
+
+
+
+        adapter=new ArrayAdapter<>(getContext(),R.layout.list_view_style,arrayListProducts);
         listViewNewLists.setAdapter(adapter);
 
         buttonGoBack.setOnClickListener(
@@ -37,6 +51,31 @@ public class AddListFragment extends Fragment {
                     }
                 }
         );
+
+        buttonAddProduct.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        arrayListProducts.add(editTextProductName.getText().toString());
+                        adapter.notifyDataSetChanged();
+                        editTextProductName.setText("");
+
+                    }
+                }
+        );
+        buttonConfirmList.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                         test();
+                    }
+                }
+        );
+
         return view;
+    }
+    public void test(){
+        ListName listName=new ListName();
+        listName.setListName(editTextListName.getText().toString());
     }
 }

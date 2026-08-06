@@ -27,7 +27,7 @@
 
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/editTextListName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_border"
@@ -48,14 +48,14 @@
         android:text="PRODUKTY" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewProducts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     </ListView>
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/editTextTextProductName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_border"
@@ -66,7 +66,7 @@
         />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonAddProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -76,7 +76,7 @@
         android:text="DODAJ PRODUKT" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonConfirmList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
