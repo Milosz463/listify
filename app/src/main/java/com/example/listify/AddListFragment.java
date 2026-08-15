@@ -68,6 +68,15 @@ public class AddListFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                          test();
+
+                         Bundle result =new Bundle();
+                         result.putBoolean("ListAdded",true);
+
+                         getParentFragmentManager().setFragmentResult(
+                                 "ListAddedResult",
+                                 result
+                         );
+                        Navigation.findNavController(v).navigate(R.id.action_addListFragment_to_homeFragment);
                     }
                 }
         );
