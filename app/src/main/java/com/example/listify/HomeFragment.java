@@ -6,6 +6,7 @@ import static android.view.View.VISIBLE;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment {
     ListView listViewOfShoppingList;
     ArrayList<String> namesOfLists=new ArrayList<>();
     ArrayAdapter <String>arrayAdapter;
+    ListsViewModel listsViewModel;
 
 
     public HomeFragment() {
@@ -46,7 +48,10 @@ public class HomeFragment extends Fragment {
         SearchView searchListSearchView=view.findViewById(R.id.searchView);
         listViewOfShoppingList=view.findViewById(R.id.ListViewOfShoppingLists);
 
-        arrayAdapter=new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1,namesOfLists);
+        listsViewModel = new ViewModelProvider(requireActivity())
+                .get(ListsViewModel.class);
+
+        arrayAdapter=new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1,listsViewModel.getNamesOfLists());
         listViewOfShoppingList.setAdapter(arrayAdapter);
 
         addListButton.setOnClickListener(
@@ -97,7 +102,7 @@ public class HomeFragment extends Fragment {
        if(bundle!=null){
            String name=bundle.getString("name");
            if(name!=null&&!name.isEmpty()){
-                   namesOfLists.add(name);
+                   listsViewModel.addList(name);
                    arrayAdapter.notifyDataSetChanged();
            }
        }
