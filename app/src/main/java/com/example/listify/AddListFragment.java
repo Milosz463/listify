@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,11 +73,18 @@ public class AddListFragment extends Fragment {
                          Bundle result =new Bundle();
                          result.putBoolean("ListAdded",true);
 
+                        Bundle listName =new Bundle();
+                        String name=editTextListName.getText().toString();
+                        listName.putString("name",name);
+
                          getParentFragmentManager().setFragmentResult(
                                  "ListAddedResult",
                                  result
                          );
-                        Navigation.findNavController(v).navigate(R.id.action_addListFragment_to_homeFragment);
+                        Navigation.findNavController(v).navigate(R.id.action_addListFragment_to_homeFragment, listName);
+
+
+
                     }
                 }
         );
