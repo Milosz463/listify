@@ -111,5 +111,5 @@ public class HomeFragment extends Fragment {
     public void goIntoList(View view){
 Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_fragmentListItems);
     }
-
+//todo
 }
