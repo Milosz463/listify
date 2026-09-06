@@ -3,6 +3,7 @@ package com.example.listify;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -22,6 +23,7 @@ public class AddListFragment extends Fragment {
     ArrayList<String>arrayListProducts=new ArrayList<>();
     ArrayAdapter<String>adapter;
     EditText editTextListName;
+    ListsViewModel listsViewModel;
     public AddListFragment() {
         // Required empty public constructor
     }
@@ -37,6 +39,8 @@ public class AddListFragment extends Fragment {
         Button buttonConfirmList=view.findViewById(R.id.buttonConfirmList);
         EditText editTextProductName=view.findViewById(R.id.editTextTextProductName);
         editTextListName=view.findViewById(R.id.editTextListName);
+        listsViewModel = new ViewModelProvider(requireActivity())
+                .get(ListsViewModel.class);
 
 
 
@@ -49,6 +53,25 @@ public class AddListFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Navigation.findNavController(v).navigate(R.id.action_addListFragment_to_homeFragment);
+                        buttonGoBack.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                if (listsViewModel.getNamesOfLists().isEmpty()) {
+                                    Bundle result = new Bundle();
+                                    result.putBoolean("ListAdded", true);
+
+                                    getParentFragmentManager().setFragmentResult(
+                                            "ListAddedResult",
+                                            result
+                                    );
+                                }
+
+                                Navigation.findNavController(v).navigate(
+                                        R.id.action_addListFragment_to_homeFragment
+                                );
+                            }
+                        });
                     }
                 }
         );
@@ -64,35 +87,24 @@ public class AddListFragment extends Fragment {
                     }
                 }
         );
-        buttonConfirmList.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                         test();
 
-                         Bundle result =new Bundle();
-                         result.putBoolean("ListAdded",true);
+        buttonConfirmList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                        Bundle listName =new Bundle();
-                        String name=editTextListName.getText().toString();
-                        listName.putString("name",name);
+                String name = editTextListName.getText().toString();
 
-                         getParentFragmentManager().setFragmentResult(
-                                 "ListAddedResult",
-                                 result
-                         );
-                        Navigation.findNavController(v).navigate(R.id.action_addListFragment_to_homeFragment, listName);
-
-
-
-                    }
+                if (!name.isEmpty()) {
+                    listsViewModel.addList(name);
                 }
-        );
+
+                Navigation.findNavController(v).navigate(
+                        R.id.action_addListFragment_to_homeFragment
+                );
+            }
+        });
+
 
         return view;
-    }
-    public void test(){
-        ListName listName=new ListName();
-        listName.setListName(editTextListName.getText().toString());
     }
 }

@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,7 +29,6 @@ public class HomeFragment extends Fragment {
     ImageView backgroundImageImageView;
     TextView hintTextView;
     ListView listViewOfShoppingList;
-    ArrayList<String> namesOfLists=new ArrayList<>();
     ArrayAdapter <String>arrayAdapter;
     ListsViewModel listsViewModel;
 
@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addListFragment);
+                        goToAddNewList(view);
                     }
                 });
 
@@ -75,37 +75,41 @@ public class HomeFragment extends Fragment {
                     }
                 }
         );
+
+        listViewOfShoppingList.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        goIntoList(view);
+                    }
+                }
+        );
         hideView();
 
         return view;
     }
-    public void hideView(){
-        getParentFragmentManager().setFragmentResultListener(
-                "ListAddedResult",
-                this,
-                ((requestKey, result) ->
-                {
-                    boolean listAdded=result.getBoolean("ListAdded");
 
-                    if(listAdded){
-                        backgroundImageImageView.setVisibility(GONE);
-                        hintTextView.setVisibility(GONE);
-                        listViewOfShoppingList.setVisibility(VISIBLE);
+    public void hideView() {
 
-                    }
-                })
-        );
-        showNewListName();
+        if (listsViewModel.getNamesOfLists().isEmpty()) {
+
+            backgroundImageImageView.setVisibility(VISIBLE);
+            hintTextView.setVisibility(VISIBLE);
+            listViewOfShoppingList.setVisibility(GONE);
+
+        } else {
+
+            backgroundImageImageView.setVisibility(GONE);
+            hintTextView.setVisibility(GONE);
+            listViewOfShoppingList.setVisibility(VISIBLE);
+        }
     }
-    public void showNewListName(){
-       Bundle bundle=getArguments();
-       if(bundle!=null){
-           String name=bundle.getString("name");
-           if(name!=null&&!name.isEmpty()){
-                   listsViewModel.addList(name);
-                   arrayAdapter.notifyDataSetChanged();
-           }
-       }
+
+    public void goToAddNewList(View view){
+        Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addListFragment);
+    }
+    public void goIntoList(View view){
+Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_fragmentListItems);
     }
 
 }
