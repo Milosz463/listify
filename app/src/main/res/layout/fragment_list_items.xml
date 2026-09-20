@@ -30,10 +30,9 @@
             android:id="@+id/ButtonOptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="test"
             android:layout_gravity="right"
+            android:background="@drawable/menu"
+            android:gravity="center"
             android:textColor="@color/black" />
 
     </LinearLayout>
