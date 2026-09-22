@@ -24,6 +24,7 @@ public class AddListFragment extends Fragment {
     ArrayAdapter<String>adapter;
     EditText editTextListName;
     ListsViewModel listsViewModel;
+
     public AddListFragment() {
         // Required empty public constructor
     }
@@ -41,6 +42,8 @@ public class AddListFragment extends Fragment {
         editTextListName=view.findViewById(R.id.editTextListName);
         listsViewModel = new ViewModelProvider(requireActivity())
                 .get(ListsViewModel.class);
+
+
 
 
 
@@ -84,6 +87,8 @@ public class AddListFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                         editTextProductName.setText("");
 
+
+
                     }
                 }
         );
@@ -95,12 +100,23 @@ public class AddListFragment extends Fragment {
                 String name = editTextListName.getText().toString();
 
                 if (!name.isEmpty()) {
-                    listsViewModel.addList(name);
-                }
 
-                Navigation.findNavController(v).navigate(
-                        R.id.action_addListFragment_to_homeFragment
-                );
+                    listsViewModel.addList(name);
+
+                    ProductsClass productsClass = new ProductsClass();
+
+                    for (String product : arrayListProducts) {
+                        productsClass.addProduct(product);
+                    }
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("products", productsClass);
+
+                    Navigation.findNavController(v).navigate(
+                            R.id.action_addListFragment_to_homeFragment,
+                            bundle
+                    );
+                }
             }
         });
 

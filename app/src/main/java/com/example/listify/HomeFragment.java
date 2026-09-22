@@ -3,6 +3,7 @@ package com.example.listify;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment {
     ListView listViewOfShoppingList;
     ArrayAdapter <String>arrayAdapter;
     ListsViewModel listsViewModel;
+    ProductsClass productsClass;
 
 
     public HomeFragment() {
@@ -53,6 +55,10 @@ public class HomeFragment extends Fragment {
 
         arrayAdapter=new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1,listsViewModel.getNamesOfLists());
         listViewOfShoppingList.setAdapter(arrayAdapter);
+
+        if(getArguments()!=null){
+            productsClass=(ProductsClass)getArguments().getSerializable("products");
+        }
 
         addListButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -80,7 +86,14 @@ public class HomeFragment extends Fragment {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        goIntoList(view);
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("products",productsClass);
+
+                        Navigation.findNavController(view).navigate(
+                                R.id.action_homeFragment_to_fragmentListItems,
+                                bundle);
+
+
                     }
                 }
         );
@@ -107,9 +120,6 @@ public class HomeFragment extends Fragment {
 
     public void goToAddNewList(View view){
         Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_addListFragment);
-    }
-    public void goIntoList(View view){
-Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_fragmentListItems);
     }
 //todo
 }
