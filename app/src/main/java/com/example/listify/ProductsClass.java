@@ -16,4 +16,7 @@ public class ProductsClass implements Serializable {
     public void addProduct(String product){
         listOfProducts.add(product);
     }
+    public void removeProduct(int position){
+        listOfProducts.remove(position);
+    }
 }
