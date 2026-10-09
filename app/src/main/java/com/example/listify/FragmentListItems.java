@@ -10,8 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.Navigation;
@@ -30,7 +33,9 @@ public class FragmentListItems extends Fragment {
         View view=inflater.inflate(R.layout.fragment_list_items,container,false);
 
         buttonGoBack=view.findViewById(R.id.buttonGoBack);
+        AppCompatButton buttonOptions=view.findViewById(R.id.ButtonOptions);
         listViewProducts=view.findViewById(R.id.listViewProducts);
+
         if(getArguments()!=null){
             productsClass=(ProductsClass) getArguments().getSerializable("products");
         }
@@ -42,6 +47,17 @@ public class FragmentListItems extends Fragment {
                     @Override
                     public void onClick(View v) {
                         GoBack(view);
+                    }
+                }
+        );
+
+        buttonOptions.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PopupMenu popupMenu=new PopupMenu(requireContext(),v);
+                        popupMenu.getMenuInflater().inflate(R.menu.popup_menu,popupMenu.getMenu());
+                        popupMenu.show();
                     }
                 }
         );
