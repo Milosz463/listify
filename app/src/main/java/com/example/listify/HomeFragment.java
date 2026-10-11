@@ -72,13 +72,19 @@ public class HomeFragment extends Fragment {
                 new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextChange(String s) {
+                        ArrayList<String>filteredLists=new ArrayList<>();
+                        for(String list:listsViewModel.getNamesOfLists())
+                            if(list.toLowerCase().contains(s.toLowerCase())){
+                                filteredLists.add(list);
+                            }
+                        ArrayAdapter arrayAdapterFilteredLists=new ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1,filteredLists);
+                        listViewOfShoppingList.setAdapter(arrayAdapterFilteredLists);
+
                         return false;
                     }
 
                     @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        return false;
-                    }
+                    public boolean onQueryTextSubmit(String s) { return false; }
                 }
         );
 
